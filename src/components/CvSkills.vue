@@ -1,99 +1,95 @@
+<template>
+    <section class="skills reveal" ref="sectionRef">
+        <div class="section-header">
+            <span class="section-num">02 —</span>
+            <h2 class="section-title">Compétences</h2>
+        </div>
+
+        <div class="skills__grid">
+            <div v-for="group in skillGroups" :key="group.title" class="skills__card">
+                <h3 class="skills__card-title">{{ group.title }}</h3>
+                <div class="skills__items">
+                    <span v-for="skill in group.skills" :key="skill" class="tag">
+                        {{ skill }}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>
+
 <script setup>
-defineProps({
-  skills: { type: Array, required: true },
+import { ref, onMounted } from 'vue'
+import cv from '../data/cv.json'
+
+const skillGroups = cv.skillGroups
+const sectionRef = ref(null)
+
+onMounted(() => {
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('visible')
+                    observer.unobserve(e.target)
+                }
+            })
+        },
+        { threshold: 0.1 }
+    )
+    if (sectionRef.value) observer.observe(sectionRef.value)
 })
 </script>
 
-<template>
-  <section id="skills" class="cv-section">
-    <div class="cv-section__inner">
-      <h2 class="cv-section__title">Compétences</h2>
-
-      <div class="cv-skills__grid">
-        <div
-          v-for="group in skills"
-          :key="group.category"
-          class="cv-skills__group"
-        >
-          <h3 class="cv-skills__category">{{ group.category }}</h3>
-          <ul class="cv-skills__list">
-            <li v-for="skill in group.items" :key="skill" class="cv-skills__item">
-              {{ skill }}
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-</template>
-
 <style scoped>
-.cv-section {
-  padding: var(--section-gap) 0;
-  background: var(--color-bg-surface);
+.skills {
+    padding: clamp(var(--space-lg), 8vw, var(--space-xl)) clamp(var(--space-md), 8vw, var(--space-2xl));
+    background: var(--accent-pale);
+    border-bottom: 1px solid var(--border);
 }
 
-.cv-section__inner {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 var(--space-6);
+.skills__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-sm);
 }
 
-.cv-section__title {
-  font-size: var(--text-2xl);
-  font-weight: var(--font-bold);
-  color: var(--color-text);
-  margin: 0 0 var(--space-12);
-  padding-bottom: var(--space-4);
-  border-bottom: 1px solid var(--color-border);
+.skills__card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-md);
+    transition: transform 0.2s;
 }
 
-.cv-skills__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: var(--space-8);
+.skills__card:hover {
+    transform: translateY(-2px);
 }
 
-.cv-skills__group {
-  background: var(--color-bg-elevated);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: var(--space-6);
+.skills__card-title {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: var(--space-sm);
 }
 
-.cv-skills__category {
-  font-size: var(--text-sm);
-  font-weight: var(--font-semibold);
-  color: var(--color-primary);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  margin: 0 0 var(--space-4);
+.skills__items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
 }
 
-.cv-skills__list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
+@media (max-width: 900px) {
+    .skills__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
-.cv-skills__item {
-  color: var(--color-text-muted);
-  font-size: var(--text-sm);
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-}
-
-.cv-skills__item::before {
-  content: '';
-  display: inline-block;
-  width: 4px;
-  height: 4px;
-  border-radius: var(--radius-full);
-  background: var(--color-primary);
-  flex-shrink: 0;
+@media (max-width: 600px) {
+    .skills__grid {
+        grid-template-columns: 1fr;
+    }
 }
 </style>
