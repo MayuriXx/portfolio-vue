@@ -1,57 +1,67 @@
-<script setup>
-defineProps({
-  identity: { type: Object, required: true },
-})
-</script>
-
 <template>
-  <footer class="cv-footer">
-    <div class="cv-footer__inner">
-      <p class="cv-footer__copy">
-        © {{ new Date().getFullYear() }} {{ identity.name }}
-      </p>
-      <p class="cv-footer__built">
-        Construit avec
-        <a href="https://vuejs.org" target="_blank" rel="noopener">Vue 3</a>
-        +
-        <a href="https://vitejs.dev" target="_blank" rel="noopener">Vite</a>
-      </p>
-    </div>
-  </footer>
+    <footer class="footer">
+        <span class="footer__name">{{ profile.name }} · 2025</span>
+        <div class="footer__links">
+            <a v-for="link in links" :key="link.label" :href="link.url" target="_blank" class="footer__link">
+                {{ link.label }}
+            </a>
+        </div>
+    </footer>
 </template>
 
+<script setup>
+import cv from '../data/cv.json'
+
+const profile = cv.profile
+
+const links = [
+    { label: 'Email', url: `mailto:${profile.email}` },
+    { label: 'LinkedIn', url: profile.linkedin },
+    { label: 'GitHub', url: 'https://github.com/MayuriXx' },
+]
+</script>
+
 <style scoped>
-.cv-footer {
-  background: var(--color-bg-surface);
-  border-top: 1px solid var(--color-border);
-  padding: var(--space-8) 0;
+.footer {
+    background: var(--ink);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 28px clamp(var(--space-md), 8vw, var(--space-2xl));
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
 }
 
-.cv-footer__inner {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 var(--space-6);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: var(--space-2);
+.footer__name {
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.4);
 }
 
-.cv-footer__copy,
-.cv-footer__built {
-  font-size: var(--text-sm);
-  color: var(--color-text-faint);
-  margin: 0;
+.footer__links {
+    display: flex;
+    gap: var(--space-md);
 }
 
-.cv-footer__built a {
-  color: var(--color-text-muted);
-  text-decoration: none;
-  transition: color var(--transition-fast);
+.footer__link {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.3);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: color 0.2s;
 }
 
-.cv-footer__built a:hover {
-  color: var(--color-primary);
+.footer__link:hover {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+@media (max-width: 600px) {
+    .footer {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 }
 </style>
