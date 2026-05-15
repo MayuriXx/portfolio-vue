@@ -1,71 +1,100 @@
 {
-  "identity": {
-    "name": "Émilie Martin",
-    "title": "Développeuse Full-Stack",
-    "tagline": "Je conçois des interfaces soignées et des APIs robustes.",
-    "avatar": "/avatar.jpg",
-    "location": "Paris, France",
-    "available": true
+  "profile": {
+    "name": "Evan Martho",
+    "title": "Développeur Full Stack Mobile",
+    "summary": "Développeur mobile full stack expérimenté avec une expertise approfondie en Flutter, Java et Kotlin. J'ai mené avec succès des projets internationaux, contribuant à fiabiliser les systèmes de gestion des stocks et commandes pour Leroy Merlin. Ma maîtrise des méthodologies agiles et des tests unitaires garantit des livrables robustes et évolutifs.",
+    "email": "martho.evan@gmail.com",
+    "linkedin": "https://www.linkedin.com/in/evanmartho/",
+    "location": "Lille, France"
   },
-  "contact": {
-    "email": "emilie.martin@example.com",
-    "github": "https://github.com/emiliem",
-    "linkedin": "https://linkedin.com/in/emiliem",
-    "website": "https://emiliem.dev"
-  },
-  "summary": "Passionnée par le développement web depuis plus de 5 ans, je crée des expériences utilisateur intuitives et des architectures back-end fiables. J'aime travailler en équipe, partager mes connaissances et apprendre en continu.",
-  "skills": [
+  "experiences": [
     {
-      "category": "Front-End",
-      "items": ["Vue 3", "React", "TypeScript", "CSS / Tailwind", "Vite"]
+      "company": "XPEHO",
+      "role": "Mobile App Developer — Lead Dev",
+      "period": "2021 — Présent",
+      "location": "Villeneuve-d'Ascq",
+      "description": "Missions longue durée chez Adéo (Leroy Merlin) dans le domaine ISO (In Store Operations). Rôles successifs de Développeur Front, Full-Stack puis Lead Dev sur des équipes internationales couvrant la France, l'Espagne, l'Italie et le Portugal. Développement d'applications de fiabilisation des stocks et de gestion des commandes.",
+      "tags": ["Flutter", "Riverpod", "Kotlin", "Java", "Spring Boot", "Karate", "Agile", "Lead Dev"]
     },
     {
-      "category": "Back-End",
-      "items": ["Node.js", "Express", "Python", "FastAPI", "PostgreSQL"]
-    },
-    {
-      "category": "DevOps & Outils",
-      "items": ["Docker", "GitHub Actions", "Git", "Linux", "Figma"]
-    }
-  ],
-  "experience": [
-    {
-      "company": "Acme Corp",
-      "role": "Développeuse Full-Stack Senior",
-      "period": "2022 — Présent",
-      "location": "Paris, France",
-      "description": "Conception et développement de micro-services Node.js et d'interfaces Vue 3 pour une plateforme SaaS B2B. Migration progressive d'une architecture monolithique vers des micro-services.",
-      "stack": ["Vue 3", "Node.js", "PostgreSQL", "Docker"]
-    },
-    {
-      "company": "StartupX",
-      "role": "Développeuse Front-End",
-      "period": "2020 — 2022",
-      "location": "Lyon, France",
-      "description": "Développement de l'interface principale d'une application de gestion RH. Mise en place d'un design system from scratch et intégration des maquettes Figma.",
-      "stack": ["React", "TypeScript", "Storybook", "Figma"]
-    },
-    {
-      "company": "Agence WebLab",
-      "role": "Développeuse Web Junior",
+      "company": "INEAT Group",
+      "role": "Ingénieur Études & Développement Junior",
       "period": "2019 — 2020",
-      "location": "Lyon, France",
-      "description": "Intégration de sites vitrine et e-commerce pour des PME. Maintenance et évolution de projets WordPress et Prestashop.",
-      "stack": ["HTML", "CSS", "JavaScript", "WordPress"]
-    }
-  ],
-  "education": [
-    {
-      "school": "École Centrale de Lyon",
-      "degree": "Master Informatique — Génie Logiciel",
-      "period": "2017 — 2019",
-      "description": "Spécialisation en architecture logicielle et développement web moderne."
+      "location": "Lille",
+      "description": "Développement mobile multiplateforme via Flutter, intégration Firebase Analytics, architecture d'une solution de migration de données from scratch. Consommation d'APIs REST, SharePoint et Microsoft Graph. Implémentation de la couche réseau avec Chopper.",
+      "tags": ["Flutter", "Firebase", "REST API", "Microsoft Graph", "Chopper"]
     },
     {
-      "school": "IUT Lyon 1",
-      "degree": "BUT Informatique",
-      "period": "2015 — 2017",
-      "description": "Formation généraliste couvrant algorithmique, base de données et développement applicatif."
+      "company": "Enedis",
+      "role": "Développeur Fullstack & Data",
+      "period": "2017 — 2019",
+      "location": "Lille",
+      "description": "Conception et maintenance d'applications métiers en équipe de 6 développeurs via CodeIgniter. Optimisation des échanges via External Tables, scripts d'insertion Bash et ordonnancement Crontab. Création de dashboards décisionnels sous Tableau Desktop.",
+      "tags": ["PHP CodeIgniter", "SQL Server", "Bash", "Tableau Desktop"]
+    },
+    {
+      "company": "Tata Steel",
+      "role": "Développeur WinDev",
+      "period": "2016 — 2017",
+      "location": "France",
+      "description": "Conception et évolution d'applications métiers via WinDev et WebDev. Administration SQL Server, planification PERT, gestion salle serveur et stratégies de sauvegarde LTO.",
+      "tags": ["WinDev", "WebDev", "SQL Server", "PERT"]
+    },
+    {
+      "company": "Tôles Perforées de la Sambre",
+      "role": "Technicien Informatique",
+      "period": "2014 — 2016",
+      "location": "France",
+      "description": "Administration et exploitation du parc informatique, virtualisation serveurs, déploiement d'outils. Développement d'une application Java d'automatisation documentaire (parsing ERP, conversion PDF, routage dynamique).",
+      "tags": ["Java", "Virtualisation", "Administration système"]
+    }
+  ],
+  "skillGroups": [
+    {
+      "title": "Mobile",
+      "skills": ["Flutter", "Riverpod", "Union Architecture", "Widget Tests", "Golden Tests", "Firebase"]
+    },
+    {
+      "title": "Back-end",
+      "skills": ["Java", "Kotlin", "Spring Boot", "PHP", "REST API", "Karate Tests"]
+    },
+    {
+      "title": "Data & BDD",
+      "skills": ["SQL Server", "Tableau Desktop", "External Tables", "Bash", "Crontab"]
+    },
+    {
+      "title": "Méthodes & Outils",
+      "skills": ["Agile / Scrum", "Figma", "Miro", "GitBook", "Git", "Lead Dev"]
+    },
+    {
+      "title": "Langues",
+      "skills": ["Français natif", "Anglais avancé", "Portugais débutant"]
+    },
+    {
+      "title": "Soft Skills",
+      "skills": ["Autonomie", "Travail en équipe", "International", "Communication", "Mentoring"]
+    }
+  ],
+  "educations": [
+    {
+      "degree": "Master Informatique",
+      "school": "Université Catholique de Lille — Ingénierie informatique",
+      "period": "2017 — 2019"
+    },
+    {
+      "degree": "Licence SIO",
+      "school": "Université Polytechnique Hauts-de-France",
+      "period": "2016 — 2017"
+    },
+    {
+      "degree": "DUT Informatique",
+      "school": "Université Polytechnique Hauts-de-France",
+      "period": "2014 — 2016"
+    },
+    {
+      "degree": "Bac STI2D",
+      "school": "Lycée Théophile Legrand",
+      "period": "2011 — 2014"
     }
   ]
 }

@@ -1,22 +1,41 @@
+<template>
+  <CvHeader
+    @experience-tap="scrollTo('experience')"
+    @skills-tap="scrollTo('skills')"
+    @education-tap="scrollTo('education')"
+    @contact-tap="scrollTo('contact')"
+  />
+  <main ref="mainRef">
+    <CvHero @contact-tap="scrollTo('contact')" />
+    <CvExperience id="experience" />
+    <CvSkills id="skills" />
+    <CvEducation id="education" />
+    <CvContact id="contact" />
+    <CvFooter />
+  </main>
+</template>
+
 <script setup>
-import cv from './data/cv.json'
-import CvHeader     from './components/CvHeader.vue'
-import CvHero       from './components/CvHero.vue'
+import CvHeader from './components/CvHeader.vue'
+import CvHero from './components/CvHero.vue'
 import CvExperience from './components/CvExperience.vue'
-import CvSkills     from './components/CvSkills.vue'
-import CvEducation  from './components/CvEducation.vue'
-import CvContact    from './components/CvContact.vue'
-import CvFooter     from './components/CvFooter.vue'
+import CvSkills from './components/CvSkills.vue'
+import CvEducation from './components/CvEducation.vue'
+import CvContact from './components/CvContact.vue'
+import CvFooter from './components/CvFooter.vue'
+
+const scrollTo = (id) => {
+  const el = document.getElementById(id)
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth' })
+  }
+}
 </script>
 
-<template>
-  <CvHeader     :identity="cv.identity" />
-  <main>
-    <CvHero       :identity="cv.identity" :contact="cv.contact" :summary="cv.summary" />
-    <CvExperience :experience="cv.experience" />
-    <CvSkills     :skills="cv.skills" />
-    <CvEducation  :education="cv.education" />
-    <CvContact    :identity="cv.identity" :contact="cv.contact" />
-  </main>
-  <CvFooter     :identity="cv.identity" />
-</template>
+<style>
+main {
+  display: flex;
+  flex-direction: column;
+  padding-top: 60px;
+}
+</style>
