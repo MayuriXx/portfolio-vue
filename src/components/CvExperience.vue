@@ -1,152 +1,143 @@
+<template>
+    <section class="experience reveal" ref="sectionRef">
+        <div class="section-header">
+            <span class="section-num">01 —</span>
+            <h2 class="section-title">Expérience</h2>
+        </div>
+
+        <div class="experience__list">
+            <div v-for="exp in experiences" :key="exp.company" class="experience__item">
+                <!-- Meta -->
+                <div class="experience__meta">
+                    <span class="experience__period">{{ exp.period }}</span>
+                    <span class="experience__company">{{ exp.company }}</span>
+                    <span class="experience__location">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                            <circle cx="12" cy="10" r="3" />
+                        </svg>
+                        {{ exp.location }}
+                    </span>
+                </div>
+
+                <!-- Contenu -->
+                <div class="experience__content">
+                    <p class="experience__role">{{ exp.role }}</p>
+                    <p class="experience__desc">{{ exp.description }}</p>
+                    <div class="experience__tags">
+                        <span v-for="tag in exp.tags" :key="tag" class="tag">
+                            {{ tag }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>
+
 <script setup>
-defineProps({
-  experience: { type: Array, required: true },
+import { ref, onMounted } from 'vue'
+import cv from '../data/cv.json'
+
+const experiences = cv.experiences
+const sectionRef = ref(null)
+
+onMounted(() => {
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('visible')
+                    observer.unobserve(e.target)
+                }
+            })
+        },
+        { threshold: 0.1 }
+    )
+    if (sectionRef.value) observer.observe(sectionRef.value)
 })
 </script>
 
-<template>
-  <section id="experience" class="cv-section">
-    <div class="cv-section__inner">
-      <h2 class="cv-section__title">Expérience</h2>
-
-      <ol class="cv-exp__list">
-        <li v-for="(job, i) in experience" :key="i" class="cv-exp__item">
-          <div class="cv-exp__timeline">
-            <span class="cv-exp__dot"></span>
-            <span v-if="i < experience.length - 1" class="cv-exp__line"></span>
-          </div>
-          <div class="cv-exp__body">
-            <div class="cv-exp__head">
-              <div>
-                <h3 class="cv-exp__role">{{ job.role }}</h3>
-                <p class="cv-exp__company">{{ job.company }} · {{ job.location }}</p>
-              </div>
-              <span class="cv-exp__period">{{ job.period }}</span>
-            </div>
-            <p class="cv-exp__desc">{{ job.description }}</p>
-            <ul class="cv-exp__stack">
-              <li v-for="tech in job.stack" :key="tech" class="cv-exp__tag">{{ tech }}</li>
-            </ul>
-          </div>
-        </li>
-      </ol>
-    </div>
-  </section>
-</template>
-
 <style scoped>
-.cv-section {
-  padding: var(--section-gap) 0;
+.experience {
+    padding: clamp(var(--space-lg), 8vw, var(--space-xl)) clamp(var(--space-md), 8vw, var(--space-2xl));
+    border-bottom: 1px solid var(--border);
 }
 
-.cv-section__inner {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 var(--space-6);
+.experience__list {
+    display: flex;
+    flex-direction: column;
 }
 
-.cv-section__title {
-  font-size: var(--text-2xl);
-  font-weight: var(--font-bold);
-  color: var(--color-text);
-  margin: 0 0 var(--space-12);
-  padding-bottom: var(--space-4);
-  border-bottom: 1px solid var(--color-border);
+.experience__item {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: var(--space-lg);
+    padding: var(--space-md) 0;
+    border-bottom: 1px solid var(--border);
 }
 
-.cv-exp__list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0;
+.experience__item:last-child {
+    border-bottom: none;
 }
 
-.cv-exp__item {
-  display: grid;
-  grid-template-columns: 24px 1fr;
-  gap: 0 var(--space-5);
+/* Meta */
+.experience__meta {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding-top: 4px;
 }
 
-.cv-exp__timeline {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: var(--space-1);
+.experience__period {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
 }
 
-.cv-exp__dot {
-  width: 10px;
-  height: 10px;
-  border-radius: var(--radius-full);
-  background: var(--color-primary);
-  flex-shrink: 0;
+.experience__company {
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--ink);
 }
 
-.cv-exp__line {
-  flex: 1;
-  width: 1px;
-  background: var(--color-border);
-  margin: var(--space-2) 0;
+.experience__location {
+    font-size: 12px;
+    color: var(--ink-light);
+    display: flex;
+    align-items: center;
+    gap: 4px;
 }
 
-.cv-exp__body {
-  padding-bottom: var(--space-10);
+/* Contenu */
+.experience__role {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: var(--space-sm);
 }
 
-.cv-exp__head {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: var(--space-4);
-  flex-wrap: wrap;
-  margin-bottom: var(--space-3);
+.experience__desc {
+    font-size: 14px;
+    color: var(--ink-mid);
+    line-height: 1.7;
+    margin-bottom: var(--space-sm);
 }
 
-.cv-exp__role {
-  font-size: var(--text-lg);
-  font-weight: var(--font-semibold);
-  color: var(--color-text);
-  margin: 0 0 var(--space-1);
+.experience__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
 }
 
-.cv-exp__company {
-  font-size: var(--text-sm);
-  color: var(--color-text-muted);
-  margin: 0;
-}
-
-.cv-exp__period {
-  font-size: var(--text-xs);
-  color: var(--color-text-faint);
-  font-family: var(--font-mono);
-  white-space: nowrap;
-}
-
-.cv-exp__desc {
-  color: var(--color-text-muted);
-  line-height: var(--leading-relaxed);
-  margin: 0 0 var(--space-4);
-  font-size: var(--text-sm);
-}
-
-.cv-exp__stack {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.cv-exp__tag {
-  background: var(--color-bg-elevated);
-  border: 1px solid var(--color-border);
-  color: var(--color-text-muted);
-  padding: 2px var(--space-3);
-  border-radius: var(--radius-full);
-  font-size: var(--text-xs);
-  font-family: var(--font-mono);
+@media (max-width: 768px) {
+    .experience__item {
+        grid-template-columns: 1fr;
+        gap: var(--space-sm);
+    }
 }
 </style>
