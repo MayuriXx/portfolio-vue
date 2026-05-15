@@ -1,3 +1,13 @@
+<!--
+  CvEducation.vue — Education section (03)
+
+  Renders education entries from cv.educations as a card grid.
+  Each card shows the graduation period, degree title, and school name.
+
+  Behaviour:
+  - Uses IntersectionObserver to trigger the global reveal animation.
+  - Data source: cv.educations array in src/data/cv.json
+-->
 <template>
     <section class="education reveal" ref="sectionRef">
         <div class="section-header">

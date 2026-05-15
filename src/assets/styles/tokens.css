@@ -1,3 +1,17 @@
+/*
+ * tokens.css — Global design tokens
+ *
+ * Single source of truth for all visual variables:
+ * colors, typography, spacing, border-radius and transitions.
+ * Imported once in main.js and available to every component via CSS custom properties.
+ *
+ * Naming convention:
+ *   --c1 – --c5   : raw palette (green scale, light → dark)
+ *   --bg / --surface / --border / --ink* : semantic roles
+ *   --font-display / --font-body          : typeface stacks
+ *   --space-* : spacing scale (xs → 2xl)
+ *   --radius-* : border-radius scale
+ */
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Instrument+Sans:ital,wght@0,400;0,500;1,400&display=swap');
 
 :root {

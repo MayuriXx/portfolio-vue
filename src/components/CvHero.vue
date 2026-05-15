@@ -1,3 +1,19 @@
+<!--
+  CvHero.vue — Hero / above-the-fold section
+
+  Layout: two-column grid
+    Left  — eyebrow label, full-name heading (solid + outline), summary paragraph
+    Right — 2×2 stat cards, CTA buttons ("Me contacter" / LinkedIn)
+
+  Behaviour:
+  - Adds a `.visible` class to the inner wrapper 100ms after mount to
+    trigger the reveal CSS animation defined globally.
+  - firstName / lastName are split from cv.profile.name to apply different
+    typographic styles (solid vs outline stroke).
+
+  Emits:
+  - contact-tap : user clicked the "Me contacter" CTA button
+-->
 <template>
     <section class="hero">
         <div class="hero__blob hero__blob--top" />

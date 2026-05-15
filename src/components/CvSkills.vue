@@ -1,3 +1,13 @@
+<!--
+  CvSkills.vue — Skills section (02)
+
+  Renders skill groups from cv.skillGroups as a responsive card grid.
+  Each card shows a category title and its associated skill tags.
+
+  Behaviour:
+  - Uses IntersectionObserver to trigger the global reveal animation.
+  - Data source: cv.skillGroups array in src/data/cv.json
+-->
 <template>
     <section class="skills reveal" ref="sectionRef">
         <div class="section-header">

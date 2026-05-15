@@ -1,3 +1,17 @@
+<!--
+  CvHeader.vue — Sticky navigation bar
+
+  Behaviour:
+  - Fixed at the top of the viewport (z-index 100, height 60px)
+  - Adds a frosted-glass background class once the user scrolls past 20px
+  - Emits navigation events consumed by App.vue's scrollTo() helper
+
+  Emits:
+  - experience-tap : user clicked the "Expérience" nav link
+  - skills-tap     : user clicked the "Compétences" nav link
+  - education-tap  : user clicked the "Formation" nav link
+  - contact-tap    : user clicked the "Contact" button
+-->
 <template>
     <header class="header" :class="{ 'header--scrolled': isScrolled }">
         <div class="header__logo">{{ profile.name }}</div>
@@ -17,6 +31,8 @@ import cv from '../data/cv.json'
 defineEmits(['experience-tap', 'skills-tap', 'education-tap', 'contact-tap'])
 
 const profile = cv.profile
+
+// Tracks whether the page has been scrolled to toggle the header background
 const isScrolled = ref(false)
 
 const onScroll = () => {

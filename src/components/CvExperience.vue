@@ -1,3 +1,15 @@
+<!--
+  CvExperience.vue — Work experience section (01)
+
+  Renders each entry from cv.experiences as a two-column row:
+    Left column  — period, company name, location
+    Right column — role title, description, technology tags
+
+  Behaviour:
+  - Uses IntersectionObserver to add `.visible` when the section enters
+    the viewport, triggering the global reveal animation.
+  - Data source: cv.experiences array in src/data/cv.json
+-->
 <template>
     <section class="experience reveal" ref="sectionRef">
         <div class="section-header">

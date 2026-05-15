@@ -1,3 +1,10 @@
+<!--
+  CvFooter.vue — Page footer
+
+  Displays the author name + current year and a row of external links
+  (Email, LinkedIn, GitHub) generated from cv.profile.
+  Links open in a new tab.
+-->
 <template>
     <footer class="footer">
         <span class="footer__name">{{ profile.name }} · 2025</span>

@@ -1,3 +1,14 @@
+<!--
+  CvContact.vue — Contact section (04)
+
+  Two-column layout:
+    Left  — tagline, email CTA button, LinkedIn button
+    Right — contact detail cards (email, LinkedIn, location, languages)
+
+  Behaviour:
+  - Uses IntersectionObserver to trigger the global reveal animation.
+  - Data source: cv.profile + cv.languages in src/data/cv.json
+-->
 <template>
     <section class="contact reveal" ref="sectionRef">
         <div class="contact__inner">
