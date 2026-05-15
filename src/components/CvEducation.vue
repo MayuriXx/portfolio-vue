@@ -1,105 +1,96 @@
+<template>
+    <section class="education reveal" ref="sectionRef">
+        <div class="section-header">
+            <span class="section-num">03 —</span>
+            <h2 class="section-title">Formation</h2>
+        </div>
+
+        <div class="education__grid">
+            <div v-for="edu in educations" :key="edu.degree" class="education__card">
+                <span class="education__period">{{ edu.period }}</span>
+                <h3 class="education__degree">{{ edu.degree }}</h3>
+                <p class="education__school">{{ edu.school }}</p>
+            </div>
+        </div>
+    </section>
+</template>
+
 <script setup>
-defineProps({
-  education: { type: Array, required: true },
+import { ref, onMounted } from 'vue'
+import cv from '../data/cv.json'
+
+const educations = cv.educations
+const sectionRef = ref(null)
+
+onMounted(() => {
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('visible')
+                    observer.unobserve(e.target)
+                }
+            })
+        },
+        { threshold: 0.1 }
+    )
+    if (sectionRef.value) observer.observe(sectionRef.value)
 })
 </script>
 
-<template>
-  <section id="education" class="cv-section">
-    <div class="cv-section__inner">
-      <h2 class="cv-section__title">Formation</h2>
-
-      <div class="cv-edu__list">
-        <div
-          v-for="(edu, i) in education"
-          :key="i"
-          class="cv-edu__item"
-        >
-          <div class="cv-edu__head">
-            <div>
-              <h3 class="cv-edu__degree">{{ edu.degree }}</h3>
-              <p class="cv-edu__school">{{ edu.school }}</p>
-            </div>
-            <span class="cv-edu__period">{{ edu.period }}</span>
-          </div>
-          <p class="cv-edu__desc">{{ edu.description }}</p>
-        </div>
-      </div>
-    </div>
-  </section>
-</template>
-
 <style scoped>
-.cv-section {
-  padding: var(--section-gap) 0;
+.education {
+    padding: clamp(var(--space-lg), 8vw, var(--space-xl)) clamp(var(--space-md), 8vw, var(--space-2xl));
+    border-bottom: 1px solid var(--border);
 }
 
-.cv-section__inner {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 var(--space-6);
+.education__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-sm);
 }
 
-.cv-section__title {
-  font-size: var(--text-2xl);
-  font-weight: var(--font-bold);
-  color: var(--color-text);
-  margin: 0 0 var(--space-12);
-  padding-bottom: var(--space-4);
-  border-bottom: 1px solid var(--color-border);
+.education__card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-md) clamp(var(--space-md), 3vw, var(--space-lg));
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
 }
 
-.cv-edu__list {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-6);
+.education__card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 28px rgba(107, 144, 128, 0.1);
+    border-color: var(--accent);
 }
 
-.cv-edu__item {
-  background: var(--color-bg-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: var(--space-6);
-  transition: border-color var(--transition-fast);
+.education__period {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
 }
 
-.cv-edu__item:hover {
-  border-color: var(--color-border-light);
+.education__degree {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink);
 }
 
-.cv-edu__head {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: var(--space-4);
-  flex-wrap: wrap;
-  margin-bottom: var(--space-3);
+.education__school {
+    font-size: 13px;
+    color: var(--ink-light);
+    line-height: 1.5;
 }
 
-.cv-edu__degree {
-  font-size: var(--text-base);
-  font-weight: var(--font-semibold);
-  color: var(--color-text);
-  margin: 0 0 var(--space-1);
-}
-
-.cv-edu__school {
-  font-size: var(--text-sm);
-  color: var(--color-primary);
-  margin: 0;
-}
-
-.cv-edu__period {
-  font-size: var(--text-xs);
-  color: var(--color-text-faint);
-  font-family: var(--font-mono);
-  white-space: nowrap;
-}
-
-.cv-edu__desc {
-  font-size: var(--text-sm);
-  color: var(--color-text-muted);
-  line-height: var(--leading-relaxed);
-  margin: 0;
+@media (max-width: 600px) {
+    .education__grid {
+        grid-template-columns: 1fr;
+    }
 }
 </style>
