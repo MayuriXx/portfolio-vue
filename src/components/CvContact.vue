@@ -1,95 +1,178 @@
+<template>
+    <section class="contact reveal" ref="sectionRef">
+        <div class="contact__inner">
+            <!-- Gauche -->
+            <div class="contact__left">
+                <div class="section-header">
+                    <span class="section-num">04 —</span>
+                    <h2 class="section-title contact__title">Contact</h2>
+                </div>
+                <p class="contact__tagline">
+                    "Prêt à rejoindre une équipe ambitieuse et à relever de nouveaux défis techniques."
+                </p>
+                <div class="contact__actions">
+                    <a :href="`mailto:${profile.email}`" class="btn btn--dark">
+                        {{ profile.email }}
+                    </a>
+                    <a :href="profile.linkedin" target="_blank" class="btn btn--outline">
+                        LinkedIn →
+                    </a>
+                </div>
+            </div>
+
+            <!-- Droite -->
+            <div class="contact__right">
+                <a :href="`mailto:${profile.email}`" class="contact__link">
+                    <div class="contact__link-icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <rect x="2" y="4" width="20" height="16" rx="2" />
+                            <path d="m2 7 10 7 10-7" />
+                        </svg>
+                    </div>
+                    {{ profile.email }}
+                </a>
+
+                <a :href="profile.linkedin" target="_blank" class="contact__link">
+                    <div class="contact__link-icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
+                            <path
+                                d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z" />
+                            <circle cx="4" cy="4" r="2" />
+                        </svg>
+                    </div>
+                    linkedin.com/in/evanmartho
+                </a>
+
+                <div class="contact__link contact__link--static">
+                    <div class="contact__link-icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                            <circle cx="12" cy="10" r="3" />
+                        </svg>
+                    </div>
+                    {{ profile.location }}
+                </div>
+            </div>
+        </div>
+    </section>
+</template>
+
 <script setup>
-defineProps({
-  identity: { type: Object, required: true },
-  contact:  { type: Object, required: true },
+import { ref, onMounted } from 'vue'
+import cv from '../data/cv.json'
+
+const profile = cv.profile
+const sectionRef = ref(null)
+
+onMounted(() => {
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('visible')
+                    observer.unobserve(e.target)
+                }
+            })
+        },
+        { threshold: 0.1 }
+    )
+    if (sectionRef.value) observer.observe(sectionRef.value)
 })
 </script>
 
-<template>
-  <section id="contact" class="cv-section">
-    <div class="cv-section__inner">
-      <h2 class="cv-section__title">Contact</h2>
-
-      <div class="cv-contact__grid">
-        <a :href="'mailto:' + contact.email" class="cv-contact__card">
-          <span class="cv-contact__label">Email</span>
-          <span class="cv-contact__value">{{ contact.email }}</span>
-        </a>
-
-        <a :href="contact.github" target="_blank" rel="noopener" class="cv-contact__card">
-          <span class="cv-contact__label">GitHub</span>
-          <span class="cv-contact__value">{{ contact.github.replace('https://', '') }}</span>
-        </a>
-
-        <a :href="contact.linkedin" target="_blank" rel="noopener" class="cv-contact__card">
-          <span class="cv-contact__label">LinkedIn</span>
-          <span class="cv-contact__value">{{ contact.linkedin.replace('https://', '') }}</span>
-        </a>
-
-        <div class="cv-contact__card cv-contact__card--location">
-          <span class="cv-contact__label">Localisation</span>
-          <span class="cv-contact__value">{{ identity.location }}</span>
-        </div>
-      </div>
-    </div>
-  </section>
-</template>
-
 <style scoped>
-.cv-section {
-  padding: var(--section-gap) 0;
-  background: var(--color-bg-surface);
+.contact {
+    background: var(--ink);
+    padding: clamp(var(--space-lg), 8vw, var(--space-xl)) clamp(var(--space-md), 8vw, var(--space-2xl));
 }
 
-.cv-section__inner {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 var(--space-6);
+.contact__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+    align-items: start;
 }
 
-.cv-section__title {
-  font-size: var(--text-2xl);
-  font-weight: var(--font-bold);
-  color: var(--color-text);
-  margin: 0 0 var(--space-12);
-  padding-bottom: var(--space-4);
-  border-bottom: 1px solid var(--color-border);
+/* Titre blanc */
+.contact__title {
+    color: white;
 }
 
-.cv-contact__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: var(--space-4);
+.contact__title~.section-num {
+    color: var(--accent-mid);
 }
 
-.cv-contact__card {
-  background: var(--color-bg-elevated);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: var(--space-5);
-  text-decoration: none;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-  transition: border-color var(--transition-fast), transform var(--transition-fast);
+.contact__tagline {
+    font-family: var(--font-display);
+    font-size: clamp(18px, 2.5vw, 26px);
+    font-weight: 300;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.5;
+    margin-bottom: var(--space-lg);
 }
 
-.cv-contact__card:not(.cv-contact__card--location):hover {
-  border-color: var(--color-primary);
-  transform: translateY(-2px);
+.contact__actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    align-items: flex-start;
 }
 
-.cv-contact__label {
-  font-size: var(--text-xs);
-  color: var(--color-primary);
-  font-weight: var(--font-semibold);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+/* Liens droite */
+.contact__right {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
 }
 
-.cv-contact__value {
-  font-size: var(--text-sm);
-  color: var(--color-text-muted);
-  word-break: break-all;
+.contact__link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 15px;
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    transition: background 0.2s, transform 0.15s;
+}
+
+.contact__link:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(4px);
+}
+
+.contact__link--static {
+    cursor: default;
+}
+
+.contact__link--static:hover {
+    transform: none;
+}
+
+.contact__link-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-sm);
+    background: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+/* Surcharge section-num dans dark */
+:deep(.section-num) {
+    color: var(--accent-mid);
+}
+
+@media (max-width: 768px) {
+    .contact__inner {
+        grid-template-columns: 1fr;
+        gap: var(--space-lg);
+    }
 }
 </style>
