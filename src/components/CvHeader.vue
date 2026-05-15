@@ -1,63 +1,103 @@
-<script setup>
-defineProps({
-  identity: { type: Object, required: true },
-})
-</script>
-
 <template>
-  <header class="cv-header">
-    <div class="cv-header__inner">
-      <span class="cv-header__name">{{ identity.name }}</span>
-      <nav class="cv-header__nav">
-        <a href="#experience">Expérience</a>
-        <a href="#skills">Compétences</a>
-        <a href="#education">Formation</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </div>
-  </header>
+    <header class="header" :class="{ 'header--scrolled': isScrolled }">
+        <div class="header__logo">{{ profile.name }}</div>
+        <nav class="header__nav">
+            <a class="header__link" @click="$emit('experience-tap')">Expérience</a>
+            <a class="header__link" @click="$emit('skills-tap')">Compétences</a>
+            <a class="header__link" @click="$emit('education-tap')">Formation</a>
+            <a class="header__link header__link--primary" @click="$emit('contact-tap')">Contact</a>
+        </nav>
+    </header>
 </template>
 
+<script setup>
+import { ref, onMounted, onUnmounted } from 'vue'
+import cv from '../data/cv.json'
+
+defineEmits(['experience-tap', 'skills-tap', 'education-tap', 'contact-tap'])
+
+const profile = cv.profile
+const isScrolled = ref(false)
+
+const onScroll = () => {
+    isScrolled.value = window.scrollY > 20
+}
+
+onMounted(() => window.addEventListener('scroll', onScroll))
+onUnmounted(() => window.removeEventListener('scroll', onScroll))
+</script>
+
 <style scoped>
-.cv-header {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: var(--color-bg-surface);
-  border-bottom: 1px solid var(--color-border);
-  padding: var(--space-4) 0;
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    height: 60px;
+    padding: 0 clamp(var(--space-md), 6vw, var(--space-xl));
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bg);
+    transition: border-color 0.2s, background 0.2s;
+    border-bottom: 1px solid transparent;
 }
 
-.cv-header__inner {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 var(--space-6);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-4);
+.header--scrolled {
+    background: rgba(246, 255, 248, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom-color: var(--border);
 }
 
-.cv-header__name {
-  font-weight: var(--font-semibold);
-  color: var(--color-primary);
-  font-size: var(--text-lg);
-  white-space: nowrap;
+.header__logo {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--ink);
 }
 
-.cv-header__nav {
-  display: flex;
-  gap: var(--space-6);
+.header__nav {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
 }
 
-.cv-header__nav a {
-  color: var(--color-text-muted);
-  text-decoration: none;
-  font-size: var(--text-sm);
-  transition: color var(--transition-fast);
+.header__link {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink-mid);
+    text-decoration: none;
+    padding: 6px 14px;
+    border-radius: var(--radius-full);
+    border: 1px solid transparent;
+    transition: all 0.2s;
+    letter-spacing: 0.02em;
+    cursor: pointer;
 }
 
-.cv-header__nav a:hover {
-  color: var(--color-text);
+.header__link:hover {
+    border-color: var(--border);
+    background: var(--accent-pale);
+    color: var(--ink);
+}
+
+.header__link--primary {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+}
+
+.header__link--primary:hover {
+    background: #5a7a6d;
+    border-color: #5a7a6d;
+    color: white;
+}
+
+@media (max-width: 600px) {
+    .header__nav {
+        display: none;
+    }
 }
 </style>
