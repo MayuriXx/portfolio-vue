@@ -51,6 +51,10 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
 }
 
 .header__logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
     font-family: var(--font-display);
     font-size: 15px;
     font-weight: 700;

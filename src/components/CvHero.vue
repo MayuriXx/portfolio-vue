@@ -4,50 +4,53 @@
         <div class="hero__blob hero__blob--bottom" />
 
         <div class="hero__inner reveal" ref="heroRef">
-            <!-- Eyebrow -->
-            <div class="hero__eyebrow">
-                <span class="hero__eyebrow-line" />
-                {{ profile.title }}
+            <!-- Left content -->
+            <div class="hero__content">
+                <!-- Eyebrow -->
+                <div class="hero__eyebrow">
+                    <span class="hero__eyebrow-line" />
+                    {{ profile.title }}
+                </div>
+
+                <!-- Titre -->
+                <h1 class="hero__title">
+                    {{ firstName }}<br>
+                    <span class="hero__title--outline">{{ lastName }}</span>
+                </h1>
+
+                <!-- Desc -->
+                <p class="hero__desc">{{ profile.summary }}</p>
             </div>
 
-            <!-- Titre -->
-            <h1 class="hero__title">
-                {{ firstName }}<br>
-                <span class="hero__title--outline">{{ lastName }}</span>
-            </h1>
+            <!-- Right : stats + actions -->
+            <div class="hero__right">
+                <div class="hero__stats">
+                    <div class="hero__stat hero__stat--accent">
+                        <span class="hero__stat-num">6+</span>
+                        <span class="hero__stat-label">Ans d'expérience</span>
+                    </div>
+                    <div class="hero__stat">
+                        <span class="hero__stat-num">5</span>
+                        <span class="hero__stat-label">Pays couverts</span>
+                    </div>
+                    <div class="hero__stat">
+                        <span class="hero__stat-num">3</span>
+                        <span class="hero__stat-label">Langues parlées</span>
+                    </div>
+                    <div class="hero__stat">
+                        <span class="hero__stat-num">Lille</span>
+                        <span class="hero__stat-label">Localisation</span>
+                    </div>
+                </div>
 
-            <!-- Bottom -->
-            <div class="hero__bottom">
-                <p class="hero__desc">{{ profile.summary }}</p>
-
+                <!-- Actions sous les stats -->
                 <div class="hero__actions">
                     <button class="btn btn--dark" @click="$emit('contact-tap')">
                         Me contacter
                     </button>
-
                     <a class="btn btn--outline" :href="profile.linkedin" target="_blank">
                         LinkedIn →
                     </a>
-                </div>
-            </div>
-
-            <!-- Stat cards -->
-            <div class="hero__stats">
-                <div class="hero__stat hero__stat--accent">
-                    <span class="hero__stat-num">6+</span>
-                    <span class="hero__stat-label">Ans d'expérience</span>
-                </div>
-                <div class="hero__stat">
-                    <span class="hero__stat-num">5</span>
-                    <span class="hero__stat-label">Pays couverts</span>
-                </div>
-                <div class="hero__stat">
-                    <span class="hero__stat-num">3</span>
-                    <span class="hero__stat-label">Langues parlées</span>
-                </div>
-                <div class="hero__stat">
-                    <span class="hero__stat-num">Lille</span>
-                    <span class="hero__stat-label">Localisation</span>
                 </div>
             </div>
         </div>
@@ -113,7 +116,18 @@ onMounted(() => {
 .hero__inner {
     position: relative;
     z-index: 1;
-    max-width: 1100px;
+    max-width: 1200px;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: var(--space-xl);
+    align-items: start;
+}
+
+/* Content column */
+.hero__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
 }
 
 /* Eyebrow */
@@ -126,7 +140,6 @@ onMounted(() => {
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--accent);
-    margin-bottom: var(--space-md);
 }
 
 .hero__eyebrow-line {
@@ -140,12 +153,11 @@ onMounted(() => {
 /* Titre */
 .hero__title {
     font-family: var(--font-display);
-    font-size: clamp(56px, 10vw, 120px);
+    font-size: clamp(72px, 13vw, 140px);
     font-weight: 800;
     line-height: 0.92;
     letter-spacing: -0.04em;
     color: var(--ink);
-    margin-bottom: var(--space-lg);
 }
 
 .hero__title--outline {
@@ -153,45 +165,44 @@ onMounted(() => {
     color: transparent;
 }
 
-/* Bottom */
-.hero__bottom {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: var(--space-lg);
-    align-items: end;
-    margin-bottom: var(--space-lg);
-}
-
+/* Desc */
 .hero__desc {
-    font-size: 16px;
+    font-size: 18px;
     color: var(--ink-mid);
-    line-height: 1.7;
+    line-height: 1.8;
     max-width: 520px;
 }
 
+/* Actions */
 .hero__actions {
     display: flex;
     flex-direction: column;
     gap: var(--space-sm);
-    align-items: flex-end;
+    align-items: flex-start;
 }
 
-/* Stats */
+/* Right column */
+.hero__right {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+/* Stats column */
 .hero__stats {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: var(--space-sm);
-    margin-top: var(--space-md);
 }
 
 .hero__stat {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: var(--space-md);
+    border-radius: 16px;
+    padding: var(--space-md) var(--space-md) calc(var(--space-md) * 1.5);
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 10px;
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
@@ -207,7 +218,7 @@ onMounted(() => {
 
 .hero__stat-num {
     font-family: var(--font-display);
-    font-size: 32px;
+    font-size: 40px;
     font-weight: 700;
     letter-spacing: -0.03em;
     color: var(--ink);
@@ -218,7 +229,7 @@ onMounted(() => {
 }
 
 .hero__stat-label {
-    font-size: 12px;
+    font-size: 14px;
     color: var(--ink-light);
 }
 
@@ -226,19 +237,37 @@ onMounted(() => {
     color: rgba(255, 255, 255, 0.7);
 }
 
-@media (max-width: 768px) {
-    .hero__bottom {
+@media (max-width: 1024px) {
+    .hero__inner {
         grid-template-columns: 1fr;
+        gap: var(--space-lg);
+    }
+
+    .hero__stats {
+        grid-template-columns: repeat(4, 1fr);
     }
 
     .hero__actions {
-        align-items: flex-start;
         flex-direction: row;
-        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero__title {
+        font-size: clamp(48px, 10vw, 72px);
     }
 
     .hero__stats {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero__actions {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .hero__actions .btn {
+        width: 100%;
     }
 }
 </style>
