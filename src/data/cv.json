@@ -1,0 +1,71 @@
+{
+  "identity": {
+    "name": "Émilie Martin",
+    "title": "Développeuse Full-Stack",
+    "tagline": "Je conçois des interfaces soignées et des APIs robustes.",
+    "avatar": "/avatar.jpg",
+    "location": "Paris, France",
+    "available": true
+  },
+  "contact": {
+    "email": "emilie.martin@example.com",
+    "github": "https://github.com/emiliem",
+    "linkedin": "https://linkedin.com/in/emiliem",
+    "website": "https://emiliem.dev"
+  },
+  "summary": "Passionnée par le développement web depuis plus de 5 ans, je crée des expériences utilisateur intuitives et des architectures back-end fiables. J'aime travailler en équipe, partager mes connaissances et apprendre en continu.",
+  "skills": [
+    {
+      "category": "Front-End",
+      "items": ["Vue 3", "React", "TypeScript", "CSS / Tailwind", "Vite"]
+    },
+    {
+      "category": "Back-End",
+      "items": ["Node.js", "Express", "Python", "FastAPI", "PostgreSQL"]
+    },
+    {
+      "category": "DevOps & Outils",
+      "items": ["Docker", "GitHub Actions", "Git", "Linux", "Figma"]
+    }
+  ],
+  "experience": [
+    {
+      "company": "Acme Corp",
+      "role": "Développeuse Full-Stack Senior",
+      "period": "2022 — Présent",
+      "location": "Paris, France",
+      "description": "Conception et développement de micro-services Node.js et d'interfaces Vue 3 pour une plateforme SaaS B2B. Migration progressive d'une architecture monolithique vers des micro-services.",
+      "stack": ["Vue 3", "Node.js", "PostgreSQL", "Docker"]
+    },
+    {
+      "company": "StartupX",
+      "role": "Développeuse Front-End",
+      "period": "2020 — 2022",
+      "location": "Lyon, France",
+      "description": "Développement de l'interface principale d'une application de gestion RH. Mise en place d'un design system from scratch et intégration des maquettes Figma.",
+      "stack": ["React", "TypeScript", "Storybook", "Figma"]
+    },
+    {
+      "company": "Agence WebLab",
+      "role": "Développeuse Web Junior",
+      "period": "2019 — 2020",
+      "location": "Lyon, France",
+      "description": "Intégration de sites vitrine et e-commerce pour des PME. Maintenance et évolution de projets WordPress et Prestashop.",
+      "stack": ["HTML", "CSS", "JavaScript", "WordPress"]
+    }
+  ],
+  "education": [
+    {
+      "school": "École Centrale de Lyon",
+      "degree": "Master Informatique — Génie Logiciel",
+      "period": "2017 — 2019",
+      "description": "Spécialisation en architecture logicielle et développement web moderne."
+    },
+    {
+      "school": "IUT Lyon 1",
+      "degree": "BUT Informatique",
+      "period": "2015 — 2017",
+      "description": "Formation généraliste couvrant algorithmique, base de données et développement applicatif."
+    }
+  ]
+}
